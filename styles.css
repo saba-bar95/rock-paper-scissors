@@ -1,3 +1,7 @@
+body {
+  text-align: center;
+}
+
 div {
   font-size: 15;
   margin: 0;
@@ -6,13 +10,30 @@ div {
 p {
   margin-top: 10px;
   font-size: 12px;
+  padding: 8px;
 }
 
-.btns {
-  text-align: center;
+.last-round {
+  color: brown;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
 }
 
-.btn {
+.btn,
+.restart-btn {
   padding: 20px;
   margin: 30px;
+}
+
+.restart-btn {
+  background-color: #82c5ca;
+  border: 0;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }

@@ -1,8 +1,16 @@
 const body = document.querySelector("body");
 const btns = document.querySelectorAll(".btn");
+const restartBtn = document.querySelector(".restart-btn");
+const div = document.createElement("div");
+const para = document.createElement("p");
 
 function trimHumanSelection(str) {
   return str[0].toUpperCase() + str.slice(1).toLowerCase();
+}
+
+function lastRound() {
+  para.classList.add("last-round");
+  restartBtn.classList.remove("hidden");
 }
 
 function getComputerChoice() {
@@ -37,11 +45,14 @@ function playRound(humanSelection, computerSelection) {
 }
 
 function displayScore() {
-  if (humanWinCounter === 5)
-    return `Human reaches 5. Game over! Overal score ${humanWinCounter}:${computerWinCounter}`;
-  if (computerWinCounter === 5)
+  if (humanWinCounter === 5) {
+    lastRound();
+    return `Human reaches 5. Congrats! Overal score ${humanWinCounter}:${computerWinCounter}`;
+  }
+  if (computerWinCounter === 5) {
+    lastRound();
     return `Computer reaches 5. Game over! Overal score ${computerWinCounter}:${humanWinCounter}`;
-
+  }
   if (humanWinCounter > computerWinCounter) {
     return `Running score: Human - ${humanWinCounter}, Computer - ${computerWinCounter}`;
   } else if (humanWinCounter < computerWinCounter) {
@@ -56,9 +67,6 @@ btns.forEach((btn) =>
     if (humanWinCounter < 5 && computerWinCounter < 5) {
       const humanSelection = e.target.textContent;
       const computerSelection = getComputerChoice();
-      const div = document.createElement("div");
-      div.style.marginLeft = "100px";
-      const para = document.createElement("p");
       div.textContent = playRound(humanSelection, computerSelection);
       para.textContent = displayScore();
       body.appendChild(div);
@@ -66,3 +74,12 @@ btns.forEach((btn) =>
     }
   })
 );
+
+restartBtn.addEventListener("click", function () {
+  div.textContent = "";
+  para.textContent = "";
+  humanWinCounter = 0;
+  computerWinCounter = 0;
+  restartBtn.classList.add("hidden");
+  para.classList.remove("last-round");
+});
